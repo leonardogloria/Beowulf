@@ -9,6 +9,7 @@
     </thead>
     <tbody>
     <g:each in="${collection}" var="bean" status="i">
+
         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
             <g:each in="${domainProperties}" var="p" status="j">
                 <g:if test="${j==0}">
@@ -19,6 +20,15 @@
                 </g:else>
             </g:each>
         </tr>
+
     </g:each>
+    <g:if test="${domainProperties == null}">
+        <tr>
+            <td colspan="2" class="text-center">Não há dados cadastrados.</td>
+        </tr>
+    </g:if>
     </tbody>
 </table>
+
+
+
