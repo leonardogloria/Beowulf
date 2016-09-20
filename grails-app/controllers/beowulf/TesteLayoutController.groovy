@@ -1,7 +1,10 @@
 package beowulf
 
-class TesteLayoutController {
+import grails.plugin.springsecurity.annotation.Secured
 
-    def index() { }
-    def index2() {}
+class TesteLayoutController {
+    @Secured('ROLE_ADMIN')
+    def index() {
+        println "Only Authorized personal"
+    }
 }
