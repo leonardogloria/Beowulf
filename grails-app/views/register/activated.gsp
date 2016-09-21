@@ -1,0 +1,32 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<html>
+<head>
+    <meta name="layout" content="mainLogin"/>
+
+    <title></title>
+
+</head>
+
+<body class="hold-transition register-page">
+<div class="register-box">
+<div class="register-logo">
+    <a href="../../index2.html"><b>TCC</b>Online</a>
+</div>
+<g:form action="register">
+    <div class="register-box-body">
+        Cadastro ativado com sucesso!!
+        Você pode fazer <g:link controller="auth" action="loginIndex">Login</g:link> no TCC Online.
+    </div><!-- /.form-box -->
+    <g:if test="${flash.message}">
+        <br />
+        <div class="alert alert-error alert-dismissible">
+
+            <h4><i class="icon fa fa-check"></i> Alerta!</h4>
+            ${flash.message}
+        </div>
+    </g:if>
+    </div><!-- /.register-box -->
+</g:form>
+
+</body>
+</html>

@@ -13,10 +13,19 @@ class User implements Serializable {
 
 	String username
 	String password
+	String firstName
+	String lastName
+
+	Type type
+	static hasMany = [institutions: Institution, validations:ValidationLogin]
+
+
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+	Date userSince = new Date()
+
 
 	Set<Role> getAuthorities() {
 		UserRole.findAllByUser(this)*.role
@@ -41,9 +50,21 @@ class User implements Serializable {
 	static constraints = {
 		password blank: false, password: true
 		username blank: false, unique: true
+		institutions nullable: true
 	}
 
 	static mapping = {
 		password column: '`password`'
 	}
+}
+enum Type {
+	ORIENTADOR("Orientador"), ORIENTANDO("Orientando")
+
+	Type(String name){
+		this.name = name
+
+	}
+	String name
+
+
 }

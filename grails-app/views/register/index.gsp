@@ -7,7 +7,7 @@
             $(".select2").select2();
 
             //iCheck for checkbox and radio inputs
-            $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+            $('input[type="checkbox"].minimal, input[type="radio"]').iCheck({
                 checkboxClass: 'icheckbox_minimal-blue',
                 radioClass: 'iradio_minimal-blue'
             });
@@ -26,49 +26,43 @@
     </div><!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">Informe suas credenciais para se tornar um usuário do sistema!</p>
-        <form action="/login/authenticate" method="POST" id="loginForm"  autocomplete="off">
+        <g:form action="doRegister" controller="register">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" name="${usernameParameter ?: 'username'}" id="username" placeholder="Nome"/>
+                <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Nome"/>
 
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" name="${usernameParameter ?: 'username'}" id="username" placeholder="Sobrenome"/>
+                <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Sobrenome"/>
 
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
 
 
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" name="${usernameParameter ?: 'username'}" id="username" placeholder="E-Mail"/>
+                <input type="text" class="form-control" name="username" id="username" placeholder="E-Mail"/>
 
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Password" name="${passwordParameter ?: 'password'}" id="password"/>
 
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
+
             <div class="row">
-                <div class="col-md-2"></div>
+                <div class="col-md-1"></div>
 
-                <div class="col-md-8">
-                        <!-- Minimal style -->
+                <div class="col-md-10">
+                    <!-- Minimal style -->
 
-                        <!-- radio -->
-                        <div class="form-group">
-                            <label>
-                                <input type="radio" name="r1" class="minimal" checked>
-                                Orientador
-                            </label>
-                            <label>
-                                <input type="radio" name="r1" class="minimal">
-                                Orientando
-                            </label>
-
-                        </div>
+                    <!-- radio -->
+                    <div class="form-group">
+                    <g:radioGroup name="type"
+                                  values="${beowulf.Type.values()}"
+                                  labels="${beowulf.Type?.values()*.name()}"
+                                  value="${beowulf.Type?.values()}">
+                        ${it.radio} <g:message code="${it.label}" />&nbsp;
+                    </g:radioGroup>
+                    </div>
                 </div>
-                <div class="col-md-2"></div>
+                <div class="col-md-1"></div>
 
 
 
@@ -77,7 +71,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Instituição de Ensino</label>
-                        <g:select optionValue="name" optionKey="id" class="form-control select2" name="instituicao" from="${beowulf.Institution.list()}" multiple="multiple" style="width: 100%;"></g:select>
+                        <g:select optionValue="name" optionKey="id" class="form-control select2" name="institutions" from="${beowulf.Institution.list()}" multiple="multiple" style="width: 100%;"></g:select>
 
                     </div><!-- /.form-group -->
             </div>
@@ -104,7 +98,7 @@
 
             </div>
 
-        </form>
+        </g:form>
 
 
     </div><!-- /.login-box-body -->

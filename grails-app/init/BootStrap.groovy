@@ -1,5 +1,6 @@
 import beowulf.Institution
 import beowulf.Role
+import beowulf.Type
 import beowulf.User
 import beowulf.UserRole
 
@@ -9,7 +10,8 @@ class BootStrap {
         def adminRole = new Role(authority: 'ROLE_ADMIN').save()
         def userRole = new Role(authority: 'ROLE_USER').save()
 
-        def testUser = new User(username: 'me', password: '123456').save()
+        def testUser = new User(username: 'lsilva2@credilink.com.br', password: '123456',firstName: "Leonardo",
+        lastName: "Gloria",type: Type.ORIENTADOR).save(failOnError:true)
 
 
          new Institution(name: "Unipli").save()
