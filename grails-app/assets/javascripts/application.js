@@ -10,6 +10,8 @@
 //= require app
 //= require slimscroll
 //= require fastclick
+//= require select2.full
+//= require icheck
 //= require_tree .
 //= require_self
 

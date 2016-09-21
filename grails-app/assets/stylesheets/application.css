@@ -12,6 +12,8 @@
 *
 *= require bootstrap
 *= require AdminLTE
+*= require all
+*= require select2
 *= require skins/_all-skins
 *= require_self
 */
