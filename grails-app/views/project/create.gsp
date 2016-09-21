@@ -4,8 +4,18 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'project.label', default: 'Project')}" />
         <title> <g:message message="${entityName}" /></title>
+        <g:javascript>
+            $(function () {
+
+                $("#startDate").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+                $("#endDate").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+            });
+
+        </g:javascript>
+
     </head>
     <body>
+
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -40,8 +50,7 @@
                     <g:form action="save"  class="form-horizontal" role="form">
                         <fieldset class="form">
 
-                            <f:all bean="project"/>
-
+                            <g:render template="form" />
                         </fieldset>
                         <fieldset class="buttons">
                             <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
@@ -53,5 +62,7 @@
         </section>
     </div>
 
+
     </body>
+
 </html>

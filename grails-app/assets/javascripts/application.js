@@ -10,6 +10,9 @@
 //= require app
 //= require slimscroll
 //= require fastclick
+//= require inputmask
+//= require inputmask.extensions
+//= require inputmask.date.extensions
 //= require select2.full
 //= require icheck
 //= require_tree .

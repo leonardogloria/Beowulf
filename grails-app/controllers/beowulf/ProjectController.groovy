@@ -1,20 +1,27 @@
 package beowulf
 
+import grails.converters.JSON
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
 
 
 @Transactional(readOnly = true)
-@Secured('ROLE_ADMIN')
+@Secured('ROLE_USER')
 
 class ProjectController {
+    def springSecurityService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
+        def loggedUser = springSecurityService.getPrincipal()
+        def user = User.findByUsername(loggedUser.username)
+        def projectList = Project.findAllByOwner(user)
+
         params.max = Math.min(max ?: 10, 100)
-        respond Project.list(params), model:[projectCount: Project.count()]
+        respond projectList, model:[projectCount: projectList.size()]
     }
 
     def show(Project project) {
@@ -22,18 +29,24 @@ class ProjectController {
     }
 
     def create() {
+
         respond new Project(params)
     }
 
     @Transactional
     def save(Project project) {
+        def loggedUser = springSecurityService.getPrincipal()
+        def user = User.findByUsername(loggedUser.username)
+
+
         if (project == null) {
             transactionStatus.setRollbackOnly()
             notFound()
             return
         }
+        project.owner = user
 
-        if (project.hasErrors()) {
+        if (!project.validate()) {
             transactionStatus.setRollbackOnly()
             respond project.errors, view:'create'
             return

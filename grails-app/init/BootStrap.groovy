@@ -10,8 +10,8 @@ class BootStrap {
         def adminRole = new Role(authority: 'ROLE_ADMIN').save()
         def userRole = new Role(authority: 'ROLE_USER').save()
 
-        def testUser = new User(username: 'lsilva2@credilink.com.br', password: '123456',firstName: "Leonardo",
-        lastName: "Gloria",type: Type.ORIENTADOR).save(failOnError:true)
+        def testUser = new User(username: 'lsilva@credilink.com.br', password: '123456',firstName: "Leonardo",
+        lastName: "Gloria",type: Type.ORIENTADOR,accountLocked: false).save(failOnError:true)
 
 
          new Institution(name: "Unipli").save()
@@ -19,8 +19,7 @@ class BootStrap {
 
 
 
-
-        UserRole.create testUser, adminRole
+        UserRole.create testUser, userRole
 
         UserRole.withSession {
             it.flush()
@@ -30,6 +29,7 @@ class BootStrap {
         assert User.count() == 1
         assert Role.count() == 2
         assert UserRole.count() == 1
+        assert Institution.count() == 2
     }
     def destroy = {
     }

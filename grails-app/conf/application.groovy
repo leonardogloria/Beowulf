@@ -25,4 +25,4 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 ]
 grails.plugin.springsecurity.logout.postOnly = false
 grails.plugin.springsecurity.successHandler.alwaysUseDefault = true
-grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/project'
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/dashboard'
