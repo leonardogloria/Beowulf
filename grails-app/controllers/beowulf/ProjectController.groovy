@@ -2,6 +2,7 @@ package beowulf
 
 import grails.converters.JSON
 
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import grails.plugin.springsecurity.annotation.Secured
@@ -22,6 +23,12 @@ class ProjectController {
 
         params.max = Math.min(max ?: 10, 100)
         respond projectList, model:[projectCount: projectList.size()]
+    }
+
+    def dashboard(Project project){
+        def _memberList = project.members - project.owner
+
+        respond project
     }
 
     def show(Project project) {
@@ -51,13 +58,13 @@ class ProjectController {
             respond project.errors, view:'create'
             return
         }
-
+        project.addToMembers(user)
         project.save flush:true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'project.label', default: 'Project'), project.id])
-                redirect project
+                redirect action: 'dashboard', id: project.id
             }
             '*' { respond project, [status: CREATED] }
         }
@@ -120,5 +127,45 @@ class ProjectController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    def addMember(Project project){
+        respond project
+
+    }
+    def findMembers(){
+        JSON.registerObjectMarshaller(User) {
+            return [value:it.username, data:it.id,firstName:it.firstName, lastName:it.lastName ]
+        }
+        def query = params.query
+        def results = User.findAllByUsernameIlike("%${query}%")
+
+        response.setContentType("application/json")
+
+        def responseData = [
+                "suggestions" : results
+        ]
+        render responseData as JSON
+    }
+    def refreshMembers(Project project){
+        def _memberList = []
+        params.member.each{
+            def _user = User.get(it)
+            _memberList.add(_user)
+        }
+        project.addToMembers(_memberList)
+        project.save(flush:true,failOnError:true)
+        redirect action: 'dashboard', id: project.id
+
+
+    }
+    def removeMember(Project project){
+        def _member = User.get(params.memberId)
+        project.removeFromMembers(_member)
+        project.save(flush:true)
+        flash.message = "Membro removido com sucesso"
+        redirect action: 'dashboard' , id: project.id
+
+
     }
 }

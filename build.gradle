@@ -10,6 +10,8 @@ buildscript {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
         classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.8.2"
         classpath "org.grails.plugins:hibernate4:5.0.10"
+        classpath "org.grails.plugins:views-gradle:1.1.0.RC3"
+
     }
 }
 
@@ -22,6 +24,8 @@ apply plugin:"war"
 apply plugin:"org.grails.grails-web"
 apply plugin:"org.grails.grails-gsp"
 apply plugin:"asset-pipeline"
+apply plugin: "org.grails.grails-web"
+apply plugin: "org.grails.plugins.views-json"
 
 ext {
     grailsVersion = project.grailsVersion
@@ -56,6 +60,8 @@ dependencies {
     profile "org.grails.profiles:web"
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.8.2"
     compile 'org.grails.plugins:spring-security-core:3.1.1'
+    compile "org.grails.plugins:views-json:1.1.0.RC3"
+
 
     runtime "com.h2database:h2"
     testCompile "org.grails:grails-plugin-testing"

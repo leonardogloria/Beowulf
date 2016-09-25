@@ -14,6 +14,7 @@
 //= require inputmask.extensions
 //= require inputmask.date.extensions
 //= require select2.full
+//= require autocomplete
 //= require icheck
 //= require_tree .
 //= require_self
