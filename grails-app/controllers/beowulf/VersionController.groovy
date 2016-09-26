@@ -1,12 +1,17 @@
 package beowulf
 
+import org.springframework.security.access.annotation.Secured
+import org.springframework.web.multipart.commons.CommonsMultipartFile
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
+@Secured(['ROLE_ORIENTADOR'])
 class VersionController {
+    def springSecurityService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -17,25 +22,54 @@ class VersionController {
         respond version
     }
 
-    def create() {
-        respond new Version(params)
+    def create(Project project) {
+        respond new Version(params), model:[project:project]
     }
 
     @Transactional
     def save(Version version) {
+        def loggedUser = springSecurityService.getPrincipal()
+        def user = User.findByUsername(loggedUser.username)
+        def _project = Project.get(params.projectId)
+
         if (version == null) {
             transactionStatus.setRollbackOnly()
             notFound()
             return
         }
+        def  file = params.myFile
 
-        if (version.hasErrors()) {
+        int fileExtIndex = file.originalFilename.lastIndexOf(".")
+        version.fileName = file.originalFilename
+        String extName = file.originalFilename.substring(fileExtIndex)
+
+        if(!extName.equalsIgnoreCase(".pdf") && !extName.equalsIgnoreCase(".txt") && !extName.equalsIgnoreCase(".doc") &&
+                !extName.equalsIgnoreCase(".docx") ){
+
+            def errorMSG ="O arquivo deve possuir uma  das extensões: '.doc', '.txt', '.docx' ,'.pdf'"
+            version.errors.rejectValue("fileName", errorMSG)
+
+        }
+        def versCount = Version.countByProject(_project )
+        def fileName = params.projectId + "_" + ++versCount + extName
+
+        version.originalFileName = file.originalFilename
+        version.uploadDate = new Date()
+        version.uploadedBy = user
+        version.project = _project
+
+        if (!version.validate()) {
             transactionStatus.setRollbackOnly()
-            respond version.errors, view:'create'
+            respond version.errors, view:'create' , model:[project:_project]
             return
         }
 
-        version.save flush:true
+        _project.addToVersions(version)
+        _project.save flush:true
+        def webrootDir = servletContext.getRealPath("/") //app directory
+
+        file.transferTo(new File("C:\\consumidor\\tcc\\" + version.fileName))
+
 
         request.withFormat {
             form multipartForm {

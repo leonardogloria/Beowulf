@@ -1,4 +1,5 @@
 import beowulf.Institution
+import beowulf.Project
 import beowulf.Role
 import beowulf.Type
 import beowulf.User
@@ -19,7 +20,8 @@ class BootStrap {
 
 
 
-         new Institution(name: "Unipli").save()
+         def inst = new Institution(name: "Unipli")
+         inst.save()
          new Institution(name: "Cederj").save()
 
 
@@ -43,6 +45,9 @@ class BootStrap {
             it.flush()
             it.clear()
         }
+        def projeto = new Project(owner: testUser,name: "Teste1",description: "Teste",endDate: new Date(),startDate: new Date(),institution: inst)
+        projeto.save()
+
 
 
         assert User.count() == 2

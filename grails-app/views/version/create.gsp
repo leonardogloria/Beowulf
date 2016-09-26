@@ -29,6 +29,7 @@
                 </div>
                 <div class="box-body">
 
+
                     <g:hasErrors bean="${this.version}">
                         <ul class="errors" role="alert">
                             <g:eachError bean="${this.version}" var="error">
@@ -37,16 +38,16 @@
                         </ul>
                     </g:hasErrors>
 
-                    <g:form action="save"  class="form-horizontal" role="form">
+                    <g:uploadForm action="save"  enctype="multipart/form-data" useToken="true"  class="form-horizontal" role="form">
                         <fieldset class="form">
 
-                            <f:all bean="version"/>
+                            <g:render template="form"/>
 
                         </fieldset>
                         <fieldset class="buttons">
                             <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                         </fieldset>
-                    </g:form>
+                    </g:uploadForm>
 
                 </div>
             </div>

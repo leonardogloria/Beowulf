@@ -27,6 +27,7 @@ class ProjectController {
 
     def dashboard(Project project){
         def _tasks =Task.findAllByProject(project,[max:5,sort:'createdDate',order:'desc'])
+        def _version =
         respond project, model:[tasks:_tasks]
     }
 
