@@ -26,9 +26,8 @@ class ProjectController {
     }
 
     def dashboard(Project project){
-        def _memberList = project.members - project.owner
-
-        respond project
+        def _tasks =Task.findAllByProject(project,[max:5,sort:'createdDate',order:'desc'])
+        respond project, model:[tasks:_tasks]
     }
 
     def show(Project project) {
@@ -52,6 +51,7 @@ class ProjectController {
             return
         }
         project.owner = user
+
 
         if (!project.validate()) {
             transactionStatus.setRollbackOnly()

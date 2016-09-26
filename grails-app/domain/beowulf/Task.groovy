@@ -4,11 +4,28 @@ class Task {
     String name
     String description
     Date createdDate
+    Date closeDate
     User assignedTo
     User openBy
-    Project project
-
+    Status status = Status.NEW
+    static belongsTo = [project:Project]
 
     static constraints = {
+        description nullable: true, blank: true
+        closeDate nullable: true
+        assignedTo nullable: true
+
     }
+}
+enum Status {
+    NEW("Novo"),ASSIGNED('Atribuido'),CLOSED('Fechado')
+    Status(String Status){
+        this.status = status
+    }
+    String status
+
+    public String getStatus(){
+        this.status
+    }
+
 }

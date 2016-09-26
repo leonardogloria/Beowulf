@@ -15,7 +15,7 @@ class Project {
     ProjectModel model
     Institution institution
 
-    static hasMany = [members:User]
+    static hasMany = [members:User,tasks:Task]
 
     static constraints = {
         description blank: true, nullable: true

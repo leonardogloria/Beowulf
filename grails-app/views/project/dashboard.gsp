@@ -66,7 +66,7 @@
             </div><!-- /.col -->
         </div><!-- /.row -->
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <!-- USERS LIST -->
             <div class="box box-danger">
                 <div class="box-header with-border">
@@ -114,10 +114,41 @@
 
             </div><!-- /.box-footer -->
             </div><!--/.box -->
-            <div class="row">
 
+</div>
+    <div class="col-md-4">
+        <!-- PRODUCT LIST -->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Últimas Tarefas</h3>
+                <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                </div>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <ul class="products-list product-list-in-box">
 
-            </div><!-- inner row -->
+                    <g:each in="${tasks}" var="task">
+                        <li class="item">
+                            <div class="product-img">
+                                <asset:image src="task.png"></asset:image>
+                            </div>
+                            <div class="product-info">
+                                <a href="javascript::;" class="product-title">${task.name} <span class="label label-warning pull-right">${task.status}</span></a>
+                                <span class="product-description">
+                                    ${task.description}
+                                </span>
+                            </div>
+                        </li><!-- /.item -->
+
+                    </g:each>
+                </ul>
+            </div><!-- /.box-body -->
+            <div class="box-footer text-center">
+                <a href="javascript::;" class="uppercase">Ver todas as Tarefas</a>
+            </div><!-- /.box-footer -->
+        </div><!-- /.box -->
+    </div>
 </div>
 
 
