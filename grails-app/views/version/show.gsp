@@ -36,7 +36,77 @@
 
                 <div class="box-body">
                     <form  class="form-horizontal">
-                        <f:display bean="version" />
+                        <div class="form-group  fieldcontain ">
+                            <label for="name" class="col-md-3 control-label">
+                                Nome da Versão
+
+                                <span class="required-indicator">*</span>
+
+                            </label>
+
+                            <div class="col-md-7">
+                                <input type="text" disabled="disabled" class="form-control" name="name" value="${version.name}" id="name">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group  fieldcontain ">
+                            <label for="name" class="col-md-3 control-label">
+                                Descrição
+
+                            </label>
+
+                            <div class="col-md-7">
+                                <input type="text" disabled="disabled" class="form-control" name="description" value="${version.description}" id="description">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group  fieldcontain ">
+                            <label for="fileName" class="col-md-3 control-label">
+                                Data de Envio:
+
+                                <span class="required-indicator">*</span>
+
+                            </label>
+
+                            <div class="col-md-7">
+                                <input type="text" disabled="disabled" class="form-control" name="description" value="<g:formatDate format="dd/MM/yyyy - HH:MM" date="${version.uploadDate}"></g:formatDate>" id="uploadDate">
+
+                            </div>
+                        </div>
+                        <div class="form-group  fieldcontain ">
+                            <label for="fileName" class="col-md-3 control-label">
+                                Enviado por:
+
+                                <span class="required-indicator">*</span>
+
+                            </label>
+
+                            <div class="col-md-7">
+                                <input type="text" disabled="disabled" class="form-control" name="description" value="${version.uploadedBy.firstName + ' '  + version.uploadedBy.lastName}" id="uploadDate">
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group  fieldcontain ">
+                            <label for="fileName" class="col-md-3 control-label">
+                                Arquivo:
+
+                                <span class="required-indicator">*</span>
+
+                            </label>
+
+                            <div class="col-md-7">
+                                <input type="text" disabled="disabled" class="form-control" name="description" value="${version.originalFileName}" id="description">
+
+
+                            </div>
+                        </div>
+
+
 
                     </form>
 
@@ -47,8 +117,9 @@
                     <g:form url="[resource:cargoInstance, action:'delete']" method="DELETE">
                         <fieldset class="buttons">
                             <g:link class="btn btn-primary" action="edit" resource="${this.version}">Editar</g:link>
-                            <g:actionSubmit class="btn btn-danger" action="delete" value="Excluir" onclick="return confirm('Tem certeza?')');" />
-                            <g:link class="btn btn-primary" action="index"><g:message code="default.button.back.label" default="Voltar" /></g:link>
+                            <g:actionSubmit class="btn btn-danger" action="delete" value="Excluir" onclick="return confirm('Tem certeza?');" />
+                            <g:link class="btn btn-primary" action="createComment" id="${version.id}"><g:message code="default.button.back.label" default="Voltar" /></g:link>
+                            <g:link class="btn btn-primary" controller="project" action="dashboard" id="${version.project.id}"><g:message code="default.button.back.label" default="Voltar" /></g:link>
 
                         </fieldset>
                     </g:form>

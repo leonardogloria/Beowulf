@@ -14,7 +14,7 @@
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i>  <g:message message="${entityName}" /></a></li>
-            <li class="active">Editar</li>
+            <li class="active">Novo</li>
         </ol>
     </section>
 
@@ -24,12 +24,13 @@
         <!-- Default box -->
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">Editar  <g:message message="${entityName}" /></h3>
+                <h3 class="box-title">Novo  <g:message message="${entityName}" /></h3>
 
             </div>
             <div class="box-body">
 
-                <g:hasErrors bean="${this.version}">
+
+                <g:hasErrors bean="${this.comment}">
                     <ul class="errors" role="alert">
                         <g:eachError bean="${this.version}" var="error">
                             <li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
@@ -37,15 +38,25 @@
                     </ul>
                 </g:hasErrors>
 
-                    <g:form class="form-horizontal" role="form" url="[resource:version, action:'update']" method="POST" >
+                <g:form action="saveComment"  useToken="true"  class="form-horizontal" role="form">
+                    <fieldset class="form">
+                        <input type="hidden" name="version.id" value="${version.id}" />
+                        <div class="form-group  fieldcontain ">
 
-                        <fieldset class="form">
+                            <label for="name" class="col-md-3 control-label">
+                                Mensagem
+                                <span class="required-indicator">*</span>
 
-                       <g:render template="formUpload"></g:render>
+                            </label>
 
+                            <div class="col-md-7">
+                                <input type="text" class="form-control" name="name" value="" id="name">
+
+                            </div>
+                        </div>
                     </fieldset>
                     <fieldset class="buttons">
-                        <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Update')}" />
+                        <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
                     </fieldset>
                 </g:form>
 

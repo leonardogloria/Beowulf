@@ -166,10 +166,10 @@
                     <g:each in="${project.versions}" var="version">
                         <li class="item">
                             <div class="product-img">
-                                <asset:image src="task.png"></asset:image>
+                                <asset:image src="doc_icon.png"></asset:image>
                             </div>
                             <div class="product-info">
-                                <a href="javascript::;" class="product-title">${version.name} <span class="label label-warning pull-right">${version.description}</span></a>
+                                <g:link controller="version" action="show" id="${version.id}"  class="product-title">${version.name} <span class="label label-warning pull-right">${version.description}</span></g:link>
                                 <span class="product-description">
                                     ${version.description}
                                 </span>

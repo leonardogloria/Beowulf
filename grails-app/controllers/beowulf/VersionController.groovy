@@ -1,5 +1,6 @@
 package beowulf
 
+import grails.converters.JSON
 import org.springframework.security.access.annotation.Secured
 import org.springframework.web.multipart.commons.CommonsMultipartFile
 
@@ -51,12 +52,13 @@ class VersionController {
 
         }
         def versCount = Version.countByProject(_project )
-        def fileName = params.projectId + "_" + ++versCount + extName
+        def _fileName = params.projectId + "_" + ++versCount + extName
 
         version.originalFileName = file.originalFilename
         version.uploadDate = new Date()
         version.uploadedBy = user
         version.project = _project
+        version.fileName = _fileName
 
         if (!version.validate()) {
             transactionStatus.setRollbackOnly()
@@ -137,5 +139,17 @@ class VersionController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    def createComment(Version version){
+        respond version
+    }
+    def saveComment(Comment comment,Version version){
+        if (!comment.validate()) {
+            //transactionStatus.setRollbackOnly()
+            respond comment.errors, view:'createComment' , model:[version:version]
+            return
+        }
+
     }
 }

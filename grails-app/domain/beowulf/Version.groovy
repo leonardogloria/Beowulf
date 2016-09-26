@@ -9,6 +9,8 @@ class Version {
     String originalFileName
     Project project
 
+    static hasMany = [comments:Comment]
+
 
     static constraints = {
         description nullable: true, blank: true
