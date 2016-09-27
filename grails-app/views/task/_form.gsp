@@ -17,7 +17,6 @@
     <label for="description" class="col-md-3 control-label">
         Descrição
 
-
     </label>
     <div class="col-md-7">
         <input type="text" class="form-control" name="description" value="${task.description}" id="description">
@@ -34,7 +33,7 @@
     </label>
     <div class="col-md-7">
         <g:select     noSelection="${['null':'Selecione...']}"
-                      optionKey="id" optionValue="firstName" value="${task.assignedTo}" from="${project.members}" class="form-control" name="assignedTo" id="assignedTo"></g:select>
+                      optionKey="id" optionValue="firstName" value="${task.assignedTo}" from="${project.members + project.owner}" class="form-control" name="assignedTo" id="assignedTo"></g:select>
 
     </div>
 </div>

@@ -8,12 +8,14 @@ class Task {
     User assignedTo
     User openBy
     Status status = Status.NEW
+    String closeInfo
     static belongsTo = [project:Project]
 
     static constraints = {
         description nullable: true, blank: true
         closeDate nullable: true
         assignedTo nullable: true
+        closeInfo nullable: true
 
     }
 }

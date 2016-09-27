@@ -94,7 +94,7 @@
                                 <span class="users-list-date">
 
                                     <sec:ifAnyGranted roles='ROLE_ORIENTADOR'>
-                                        <g:link action="removeMember" resource="${project}" params="${[memberId:member.id]}" onclick="return confirm('Tem certeza?');">Att</g:link>
+                                        <g:link action="removeMember" resource="${project}" params="${[memberId:member.id]}" onclick="return confirm('Tem certeza?');">Remover</g:link>
 
 
                                     </sec:ifAnyGranted>
@@ -134,7 +134,7 @@
                                 <asset:image src="task.png"></asset:image>
                             </div>
                             <div class="product-info">
-                                <a href="javascript::;" class="product-title">${task.name} <span class="label label-warning pull-right">${task.status}</span></a>
+                                <g:link controller="task" action="edit" id="${task.id}" class="product-title">${task.name} <span class="label label-warning pull-right">${task.status}</span></g:link>
                                 <span class="product-description">
                                     ${task.description}
                                 </span>

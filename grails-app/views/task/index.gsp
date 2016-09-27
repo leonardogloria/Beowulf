@@ -36,7 +36,45 @@
 
                 </div>
                 <div class="box-body">
-                    <f:table collection="${taskList}" />
+
+
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>Nome</td>
+                            <td>Atribuído à</td>
+                            <td>Status</td>
+                            <td>Data de Abertura</td>
+                            <td>Data de Encerramento</td>
+                            <td>Ações</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <g:each in="${tasks}" status="i" var="task">
+                            <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                                <td><g:link action="show" id="${task.id}">${task.id}</g:link></td>
+                                <td>${task.name}</td>
+                                <td>${task.assignedTo?.getFullName()}</td>
+                                <td>${task.status}</td>
+
+                                <td><g:formatDate format="dd/MM/yyyy - HH:mm" date="${task.createdDate}" /></td>
+                                <td><g:formatDate format="dd/MM/yyyy - HH:mm" date="${task.closeDate}" /></td>
+                                <td>
+                                    <g:link action="close" id="${task.id}"><i title="Fechar Tarefa" class="fa fa-fw fa-check-square-o"></i></g:link>&nbsp;
+                                </td>
+
+                            </tr>
+                        </g:each>
+                        <g:if test="${tasks == null}">
+                            <tr>
+                                <td class="text-center">Não há tarefas cadastradas.</td>
+                            </tr>
+                        </g:if>
+                        </tbody>
+                    </table>
+
+
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
