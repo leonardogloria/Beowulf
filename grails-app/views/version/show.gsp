@@ -4,6 +4,15 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'version.label', default: 'Version')}" />
         <title> <g:message message="${entityName}" /></title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+        <g:javascript>
+            $(function () {
+                $( "#accordion" ).accordion();
+            } );
+        </g:javascript>
     </head>
     <body>
 
@@ -105,12 +114,28 @@
 
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-6">
+                                <div id="accordion">
+                                    <g:each in="${version.comments}" var="comment">
+                                        <h3>De: ${comment.by.getFullName()} às <g:formatDate format="dd/MM/yyyy - HH:mm" date="${comment.date}" /></h3>
+                                        <div>
+                                            <p>
+                                                ${comment.text}
+                                            </p>
+                                        </div>
 
+                                    </g:each>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3"></div>
+                            </div>
 
 
                     </form>
-
-
 
                 </div> <!-- box body -->
                 <div class="box-footer">
@@ -118,7 +143,7 @@
                         <fieldset class="buttons">
                             <g:link class="btn btn-primary" action="edit" resource="${this.version}">Editar</g:link>
                             <g:actionSubmit class="btn btn-danger" action="delete" value="Excluir" onclick="return confirm('Tem certeza?');" />
-                            <g:link class="btn btn-primary" action="createComment" id="${version.id}"><g:message code="default.button.back.label" default="Voltar" /></g:link>
+                            <g:link class="btn btn-primary" action="createComment" id="${version.id}"><g:message code="default.button.back.label" default="Comentar" /></g:link>
                             <g:link class="btn btn-primary" controller="project" action="dashboard" id="${version.project.id}"><g:message code="default.button.back.label" default="Voltar" /></g:link>
 
                         </fieldset>

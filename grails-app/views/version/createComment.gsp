@@ -50,7 +50,7 @@
                             </label>
 
                             <div class="col-md-7">
-                                <input type="text" class="form-control" name="name" value="" id="name">
+                                <input type="text" class="form-control" name="text" value="" id="name">
 
                             </div>
                         </div>

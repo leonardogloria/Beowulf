@@ -145,11 +145,28 @@ class VersionController {
         respond version
     }
     def saveComment(Comment comment,Version version){
+
+        def loggedUser = springSecurityService.getPrincipal()
+        def user = User.findByUsername(loggedUser.username)
+
+        comment.date = new Date()
+        comment.versao = version
+        comment.by = user
+
         if (!comment.validate()) {
             //transactionStatus.setRollbackOnly()
+            println comment.errors as JSON
             respond comment.errors, view:'createComment' , model:[version:version]
             return
         }
+        version.addToComments(comment)
+
+        if( version.save(flush:true)){
+            flash.message = "Comentario Adicionado com sucesso"
+            redirect(action: 'show', id: version.id)
+
+        }
+
 
     }
 }

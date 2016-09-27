@@ -30,7 +30,9 @@ class User implements Serializable {
 	Set<Role> getAuthorities() {
 		UserRole.findAllByUser(this)*.role
 	}
-
+	public String getFullName(){
+		"${firstName + " " + lastName}"
+	}
 	def beforeInsert() {
 		encodePassword()
 	}

@@ -3,9 +3,9 @@ package beowulf
 class Comment {
     String text
     Date date
-    User commentBy
+    User by
 
-    static belongsTo = [version:Version]
+    static belongsTo = [versao:Version]
 
     static constraints = {
     }
