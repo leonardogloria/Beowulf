@@ -28,18 +28,40 @@ class ProjectController {
         respond project
     }
     def doFinish(Project project){
-        project.status = ProjectStatus.FINISHED
+        def  file = params.myFile
 
-        println params as JSON
-        println project as JSON
+        int fileExtIndex = file.originalFilename.lastIndexOf(".")
+        project.finishInfo.fileName = file.originalFilename
+        String extName = file.originalFilename.substring(fileExtIndex)
+
+        if(!extName.equalsIgnoreCase(".pdf") && !extName.equalsIgnoreCase(".txt") && !extName.equalsIgnoreCase(".doc") &&
+                !extName.equalsIgnoreCase(".docx") ){
+
+            def errorMSG ="O arquivo deve possuir uma  das extensões: '.doc', '.txt', '.docx' ,'.pdf'"
+            version.errors.rejectValue("fileName", errorMSG)
+
+        }
+        project.finishInfo.originalFileName = file.originalFilename
+        project.finishInfo.date = new Date()
+
+        project.status = ProjectStatus.FINISHED
+        def webrootDir = servletContext.getRealPath("/") //app directory
+        new File("C:\\consumidor\\tcc\\" + project.id ).mkdir()
+        file.transferTo(new File("C:\\consumidor\\tcc\\" + project.id + "\\" + project.finishInfo.fileName))
+
+        if(project.save(flush:true)) {
+            flash.message = "Projeto Finalizado com sucesso!"
+            redirect action: 'dashboard', id: project.id
+            return
+        }
 
 
     }
 
+
     def dashboard(Project project){
 
         def _tasks =Task.findAllByProject(project,[max:5,sort:'createdDate',order:'desc'])
-        def _version =
         respond project, model:[tasks:_tasks]
     }
 

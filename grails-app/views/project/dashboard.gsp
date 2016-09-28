@@ -22,6 +22,14 @@
 
     <!-- Main content -->
     <section class="content">
+    <g:if test="${flash.message}">
+        <br />
+        <div class="alert alert-success alert-dismissible">
+
+            <h4><i class="icon fa fa-check"></i> Alerta!</h4>
+            ${flash.message}
+        </div>
+    </g:if>
         <!-- Info boxes -->
         <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
@@ -60,7 +68,14 @@
                     <span class="info-box-icon bg-red"><i class="ion ion-checkmark"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">
-                            <g:link controller="project" action="finish" id="${project?.id}"> Finalizar</g:link>
+                            <h3>
+                                <g:if test="${project.status != beowulf.ProjectStatus.FINISHED}">
+                                    <g:link controller="project" action="finish" id="${project?.id}"> Finalizar</g:link>
+                                </g:if>
+                                <g:else>
+                                    Finalizado
+                                </g:else>
+                            </h3>
                         </span>
                     </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
@@ -73,7 +88,6 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Membros do Projeto</h3>
                     <div class="box-tools pull-right">
-                        <span class="label label-danger">8 New Members</span>
                         <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
                 </div><!-- /.box-header -->
@@ -122,7 +136,10 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <h3 class="box-title">Últimas Tarefas</h3>
+
                 <div class="box-tools pull-right">
+                    <g:link controller="task" action="create" id="${project.id}"><span class="label label-primary">Nova Tarefa</span></g:link>
+
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
             </div><!-- /.box-header -->
@@ -158,6 +175,10 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Últimas Versões</h3>
                 <div class="box-tools pull-right">
+                    <g:link controller="version" action="create" id="${project.id}">
+                        <span class="label label-primary">Nova Versão</span>
+                    </g:link>
+
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
             </div><!-- /.box-header -->
