@@ -18,7 +18,7 @@ class TaskController {
         //params.max = Math.min(max ?: 10, 100)
         def tasks = Task.findAllByProject(project,[max:20])
 
-        render view:'index',model:[taskCount: tasks.size(),tasks:tasks]
+        render view:'index',model:[taskCount: tasks.size(),tasks:tasks,project:project]
     }
     def close(Task task){
         respond task
@@ -91,8 +91,8 @@ class TaskController {
 
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'task.label', default: 'Task'), task.id])
-                redirect controller: 'project', action: 'dashboard', id: task.project.id
+                flash.message = "Tarefa salva com sucesso"
+                redirect controller: 'task', action: 'show', id: task.id
             }
             '*'{ respond task, [status: OK] }
         }
@@ -116,6 +116,14 @@ class TaskController {
             }
             '*'{ render status: NO_CONTENT }
         }
+    }
+    def doClose(Task task){
+        task.closeDate = new Date()
+        task.status = Status.CLOSED
+        task.save(flush:true)
+
+        flash.message = "Tarefa fechada com sucesso"
+        redirect controller: "task", action: "show" , id: task.id
     }
 
     protected void notFound() {

@@ -10,45 +10,27 @@
 
     </div>
 </div>
-    <div class="form-group  fieldcontain ">
-        <label for="description" class="col-md-3 control-label">
-            Descrição
-
-        </label>
-        <div class="col-md-7">
-            <input type="text" class="form-control" name="description" value="${task.description}" id="description">
-
-        </div>
-    </div><div class="form-group  fieldcontain ">
-    <label for="closeDate" class="col-md-3 control-label">
-        closeDate
+<div class="form-group  fieldcontain ">
+    <label for="description" class="col-md-3 control-label">
+        Descrição
 
     </label>
     <div class="col-md-7">
-        <input type="text" class="form-control" name="closeDate" value="" id="closeDate">
+        <input type="text" class="form-control" name="description" value="${task.description}" id="description">
 
     </div>
-</div><div class="form-group  fieldcontain ">
+</div>
+
+<div class="form-group  fieldcontain ">
     <label for="assignedTo" class="col-md-3 control-label">
         assignedTo
 
     </label>
     <div class="col-md-7">
-        <input type="text" class="form-control" name="assignedTo" value="User(username:lsilva@credilink.com.br)" id="assignedTo">
-
+        <g:select name="assignedTo" optionKey="id" optionValue="fullName" from="${task?.project?.members}" value="${task.assignedTo?.id}" class="form-control"></g:select>
     </div>
-</div><div class="form-group  fieldcontain ">
-    <label for="project" class="col-md-3 control-label">
-        project
-
-        <span class="required-indicator">*</span>
-
-    </label>
-    <div class="col-md-7">
-        <input type="text" class="form-control" name="project" value="beowulf.Project : 1" id="project">
-
-    </div>
-</div><div class="form-group  fieldcontain ">
+</div>
+<div class="form-group  fieldcontain ">
     <label for="status" class="col-md-3 control-label">
         status
 
@@ -56,32 +38,7 @@
 
     </label>
     <div class="col-md-7">
-        <input type="text" class="form-control" name="status" value="NEW" id="status">
-
-    </div>
-</div>
-
-<div class="form-group  fieldcontain ">
-    <label for="openBy" class="col-md-3 control-label">
-        openBy
-
-        <span class="required-indicator">*</span>
-
-    </label>
-    <div class="col-md-7">
-        <input type="text" class="form-control" name="openBy" value="User(username:lsilva@credilink.com.br)" id="openBy">
-
-    </div>
-</div><div class="form-group  fieldcontain ">
-    <label for="createdDate" class="col-md-3 control-label">
-        createdDate
-
-        <span class="required-indicator">*</span>
-
-    </label>
-    <div class="col-md-7">
-        <input type="text" class="form-control" name="createdDate" value="2016-09-25 02:28:37.237" id="createdDate">
-
+        <g:select class="form-control" value="${task.status}" name="status" from="${beowulf.Status.values() - beowulf.Status.CLOSED}"></g:select>
     </div>
 </div>
 

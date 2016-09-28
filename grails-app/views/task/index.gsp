@@ -1,3 +1,4 @@
+<%@ page import="beowulf.Status" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,10 +13,10 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <small>it all starts here</small>
+                Tarefas
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> <g:message code="default.new.label" args="[entityName]" /></a></li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> Tarefas</a></li>
                 <li><a href="#">Lista</a></li>
             </ol>
         </section>
@@ -29,7 +30,7 @@
                     <h3 class="box-title"></h3>
                     <div class="row">
                         <div class="col-md-12 bottom-mg-15">
-                            <g:link action="create" class="btn btn-app" ><i class="fa fa-save"></i>Novo</g:link>
+                            <g:link action="create" id="${project.id}" class="btn btn-app" ><i class="fa fa-save"></i>Nova</g:link>
                         </div>
 
                     </div>
@@ -61,7 +62,10 @@
                                 <td><g:formatDate format="dd/MM/yyyy - HH:mm" date="${task.createdDate}" /></td>
                                 <td><g:formatDate format="dd/MM/yyyy - HH:mm" date="${task.closeDate}" /></td>
                                 <td>
+                                    <g:if test="${task.status == beowulf.Status.NEW || task.status == beowulf.Status.ASSIGNED }">
                                     <g:link action="close" id="${task.id}"><i title="Fechar Tarefa" class="fa fa-fw fa-check-square-o"></i></g:link>&nbsp;
+
+                                    </g:if>
                                 </td>
 
                             </tr>

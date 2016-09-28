@@ -54,6 +54,7 @@ class BootStrap {
         assert Role.count() == 3
         assert UserRole.count() == 3
         assert Institution.count() == 2
+        assert Project.count() == 1
     }
     def destroy = {
     }

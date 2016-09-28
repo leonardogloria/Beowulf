@@ -39,11 +39,11 @@
 
                 <g:form  url="[resource:task, action:'update']"   class="form-horizontal" role="form">
                     <fieldset class="form">
-                        <g:render template="form"></g:render>
+                        <g:render template="formEditar"></g:render>
 
                     </fieldset>
                     <fieldset class="buttons">
-                        <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Update')}" />
+                        <g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.editar.label', default: 'Editar')}" />
                     </fieldset>
                 </g:form>
 

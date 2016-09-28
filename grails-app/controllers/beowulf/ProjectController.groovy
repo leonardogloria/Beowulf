@@ -24,8 +24,20 @@ class ProjectController {
         params.max = Math.min(max ?: 10, 100)
         respond projectList, model:[projectCount: projectList.size()]
     }
+    def finish(Project project){
+        respond project
+    }
+    def doFinish(Project project){
+        project.status = ProjectStatus.FINISHED
+
+        println params as JSON
+        println project as JSON
+
+
+    }
 
     def dashboard(Project project){
+
         def _tasks =Task.findAllByProject(project,[max:5,sort:'createdDate',order:'desc'])
         def _version =
         respond project, model:[tasks:_tasks]
@@ -169,4 +181,5 @@ class ProjectController {
 
 
     }
+
 }
