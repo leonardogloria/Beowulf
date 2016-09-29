@@ -21,5 +21,16 @@ class GravatarTagLib {
         out << "${_prefixx + _encoded + _sufixx}"
 
     }
+    def generateAvatarFor = {attrs, body ->
+
+
+        String _encoded = attrs.email
+        _encoded = _encoded.encodeAsMD5()
+        def _prefixx = "http://www.gravatar.com/avatar/"
+        def _sufixx = "?s=64&amp;r=pg&amp;d=mm"
+
+        out << "${_prefixx + _encoded + _sufixx}"
+
+    }
     //static encodeAsForTags = [tagName: [taglib:'html'], otherTagName: [taglib:'none']]
 }

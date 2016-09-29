@@ -11,16 +11,26 @@ import grails.transaction.Transactional
 @Secured(['ROLE_ORIENTADOR'])
 class VersionController {
     def springSecurityService
-
+    def versionService
     static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Version.list(params), model:[versionCount: Version.count()]
+    def index(Project project) {
+        def versions = versionService.findVersionsBy(project,params)
+        respond versions, model:[versionCount: versions.size(),project:project,versions:versions]
     }
 
     def show(Version version) {
         respond version
+    }
+    def download(Version version){
+        def file = new File("C:\\consumidor\\tcc\\" + version.fileName)
+
+        if (file.exists()) {
+            response.setContentType("application/octet-stream")
+            response.setHeader("Content-disposition", "filename=${version.originalFileName}")
+            response.outputStream << file.bytes
+            return
+        }
     }
 
     def create(Project project) {

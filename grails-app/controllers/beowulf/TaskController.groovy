@@ -16,17 +16,14 @@ class TaskController {
     static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 
     def index(Project project) {
-        println params as JSON
         def tasks = taskService.findTasksBy(project,params)
 
-        println tasks as JSON
 
         render view:'index',model:[taskCount: tasks.size(),tasks:tasks,project:project]
     }
     def close(Task task){
         respond task
     }
-
 
 
     def show(Task task) {

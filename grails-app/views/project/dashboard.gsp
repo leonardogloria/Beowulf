@@ -96,14 +96,15 @@
 
 
                         <li>
-                            <asset:image src="user2-160x160.jpg" alt="Avatar"></asset:image>
+                            <img  class="user-image" alt="Avatar" src="<gravatar:generateAvatarFor email='${project.owner.username}' circle="true"/>" />
+
                             <a class="users-list-name" href="#">${project.owner.firstName } </a>
 
                             <span class="users-list-date">Orientador</span>
                         </li>
                         <g:each in="${project.members - project.owner}" var="member">
                             <li>
-                                <asset:image src="user2-160x160.jpg" alt="Avatar"></asset:image>
+                                <img  class="user-image" alt="Avatar" src="<gravatar:generateAvatarFor email='${member.username}' circle="true"/>" />
                                 <a class="users-list-name" href="#">${member.firstName} </a>
 
                                 <span class="users-list-date">
@@ -188,7 +189,7 @@
                     <g:each in="${project.versions}" var="version">
                         <li class="item">
                             <div class="product-img">
-                                <asset:image src="doc_icon.png"></asset:image>
+                               <g:link controller="version" action="download" id="${version.id}"> <asset:image src="doc_icon.png"></asset:image></g:link>
                             </div>
                             <div class="product-info">
                                 <g:link controller="version" action="show" id="${version.id}"  class="product-title">${version.name} <span class="label label-warning pull-right">${version.description}</span></g:link>
