@@ -5,6 +5,19 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'task.label', default: 'Task')}" />
         <title><g:message code="default.list.label" args="[entityName]" /></title>
+        <g:javascript>
+            $(function () {
+                $('#reservation').daterangepicker({
+                    locale: {
+                        format: 'dd/MM/yyyy'
+                    }
+
+                })
+
+            });
+
+
+        </g:javascript>
     </head>
     <body>
 
@@ -28,6 +41,7 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title"></h3>
+
                     <div class="row">
                         <div class="col-md-12 bottom-mg-15">
                             <g:link action="create" id="${project.id}" class="btn btn-app" ><i class="fa fa-save"></i>Nova</g:link>
@@ -36,23 +50,35 @@
                     </div>
                     <br />
                     <div class="row">
-                        <div class="col-md-4">
+                        <g:form action="index" id="${project.id}" class="form-horizontal">
+                            <div class="col-xs-3">
+                                <input name="keywordParam" placeholder="Palavra - Chave" type="text" class="form-control" >
+                            </div>
+                            <div class="col-xs-2">
+                                <g:select  noSelection="${['':'Usuario...']}" class="form-control" optionKey="id" optionValue="firstName" name="userParam" from="${project.members + project.owner}"></g:select>
 
-                            <div class="col-md-7">
-                                <input placeholder="Palavra Chave" type="text" class="form-control" name="description"  id="description">
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <input name="dateParam" placeholder="De - Até" type="text" class="form-control pull-right" id="reservation">
+                                    </div><!-- /.input group -->
+                                </div><!-- /.form group -->
+                            </div>
+                            <div class="col-xs-2">
+                                <g:select noSelection="${['':'Status...']}" class="form-control"  name="statusParam" from="${beowulf.Status.values()}"></g:select>
 
                             </div>
 
-                        </div>
-                        <div class="col-md-4">
 
-                            <div class="col-md-7">
-                                    <g:select noSelection="${['null':'Usuario...']}" class="form-control" optionKey="id" optionValue="firstName" name="assigned" from="${project.members + project.owner}"></g:select>
+                            <div class="col-xs-2">
+                                <g:submitButton name="Filtrar" class="btn btn-primary"></g:submitButton>
+
                             </div>
-
-                        </div>
-
-
+                        </g:form>
                     </div>
 
                 </div>

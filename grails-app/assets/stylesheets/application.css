@@ -14,6 +14,7 @@
 *= require AdminLTE
 *= require all
 *= require select2
+*= require daterangepicker
 *= require skins/_all-skins
 *= require_self
 */

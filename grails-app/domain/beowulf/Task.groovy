@@ -20,7 +20,7 @@ class Task {
     }
 }
 enum Status {
-    NEW("Novo"),ASSIGNED('Atribuido'),CLOSED('Fechado')
+    NEW("NEW"),ASSIGNED('ASSIGNED'),CLOSED('CLOSED')
     Status(String Status){
         this.status = status
     }

@@ -9,6 +9,8 @@
 //= require bootstrap
 //= require app
 //= require slimscroll
+//= require moment
+//= require daterangepicker
 //= require fastclick
 //= require inputmask
 //= require inputmask.extensions

@@ -10,19 +10,23 @@ import grails.transaction.Transactional
 @Secured('ROLE_USER')
 class TaskController {
     def springSecurityService
+    def taskService
 
 
     static allowedMethods = [save: "POST", update: "POST", delete: "DELETE"]
 
     def index(Project project) {
-        //params.max = Math.min(max ?: 10, 100)
-        def tasks = Task.findAllByProject(project,[max:20])
+        println params as JSON
+        def tasks = taskService.findTasksBy(project,params)
+
+        println tasks as JSON
 
         render view:'index',model:[taskCount: tasks.size(),tasks:tasks,project:project]
     }
     def close(Task task){
         respond task
     }
+
 
 
     def show(Task task) {

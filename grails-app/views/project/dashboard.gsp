@@ -163,7 +163,7 @@
                 </ul>
             </div><!-- /.box-body -->
             <div class="box-footer text-center">
-                <a href="javascript::;" class="uppercase">Ver todas as Tarefas</a>
+            <g:link controller="task" action="index" id="${project.id}" class="uppercase">Ver todas as Tarefas</g:link>
             </div><!-- /.box-footer -->
         </div><!-- /.box -->
     </div>
@@ -202,7 +202,8 @@
                 </ul>
             </div><!-- /.box-body -->
             <div class="box-footer text-center">
-                <a href="javascript::;" class="uppercase">Ver todas as Tarefas</a>
+            <g:link  controller="version" action="index" id="${project.id}">Ver todas as Versões</g:link>
+
             </div><!-- /.box-footer -->
         </div><!-- /.box -->
     </div>
