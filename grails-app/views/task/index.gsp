@@ -34,6 +34,26 @@
                         </div>
 
                     </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-4">
+
+                            <div class="col-md-7">
+                                <input placeholder="Palavra Chave" type="text" class="form-control" name="description"  id="description">
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+
+                            <div class="col-md-7">
+                                    <g:select noSelection="${['null':'Usuario...']}" class="form-control" optionKey="id" optionValue="firstName" name="assigned" from="${project.members + project.owner}"></g:select>
+                            </div>
+
+                        </div>
+
+
+                    </div>
 
                 </div>
                 <div class="box-body">

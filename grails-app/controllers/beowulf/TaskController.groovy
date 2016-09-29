@@ -72,6 +72,12 @@ class TaskController {
     def edit(Task task) {
         respond task, model:[project: task.project]
     }
+    def myTasks(){
+        def _loggedUser = springSecurityService.getPrincipal()
+        def _user = User.findByUsername(_loggedUser.username)
+
+
+    }
 
     @Transactional
     def update(Task task) {

@@ -58,7 +58,7 @@
                                         <a href="#">
                                             <div class="pull-left">
 
-                                                <img   class="img-circle" alt="Avatar" src="<gravatar:generateAvatar circle="true"/>" />
+                                                <img class="img-circle" alt="Avatar" src="<gravatar:generateAvatar circle="true"/>" />
 
                                             </div>
                                             <h4>
@@ -219,12 +219,12 @@
             </li>
 
                 <li>
-                    <a href="../widgets.html">
+                    <g:link controller="task" action="myTasks">
                         <i class="fa fa-th"></i> <span>Tarefas</span>
                         <span class="pull-right-container">
                             <small class="label pull-right bg-green">Minhas</small>
                         </span>
-                    </a>
+                    </g:link>
                 </li>
 
             </ul>
