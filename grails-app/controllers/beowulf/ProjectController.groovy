@@ -21,6 +21,10 @@ class ProjectController {
         def user = User.findByUsername(loggedUser.username)
         def projectList = Project.findAllByOwner(user)
 
+
+
+
+
         params.max = Math.min(max ?: 10, 100)
         respond projectList, model:[projectCount: projectList.size()]
     }
@@ -107,6 +111,18 @@ class ProjectController {
 
     def edit(Project project) {
         respond project
+    }
+    def downloadFinalFile(Project project){
+
+        def file = new File("C:\\consumidor\\tcc\\" + project.id +"\\" + project.finishInfo.fileName)
+
+        if (file.exists()) {
+            response.setContentType("application/octet-stream")
+            response.setHeader("Content-disposition", "filename=${project.finishInfo.originalFileName}")
+            response.outputStream << file.bytes
+            return
+        }
+
     }
 
     @Transactional

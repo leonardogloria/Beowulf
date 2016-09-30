@@ -12,17 +12,17 @@ class BootStrap {
         def userRole = new Role(authority: 'ROLE_USER').save()
         def orientadorRole = new Role(authority: 'ROLE_ORIENTADOR').save()
 
+         def inst = new Institution(name: "Unipli")
+         inst.save()
+         new Institution(name: "Cederj").save()
+
         def testUser = new User(username: 'lsilva@credilink.com.br', password: '123456',firstName: "Leonardo",
-        lastName: "Gloria",type: Type.ORIENTADOR,accountLocked: false).save(failOnError:true)
+        lastName: "Gloria",type: Type.ORIENTADOR,accountLocked: false).addToInstitutions(inst).save(failOnError:true)
 
         def testUser2 = new User(username: 'leonardo.gloria@globo.com', password: '123456',firstName: "Cabeca",
                 lastName: "de Balde",type: Type.ORIENTANDO,accountLocked: false).save(failOnError:true)
 
 
-
-         def inst = new Institution(name: "Unipli")
-         inst.save()
-         new Institution(name: "Cederj").save()
 
 
 

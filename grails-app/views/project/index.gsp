@@ -12,10 +12,10 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <small>it all starts here</small>
+                Meus Projetos
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> <g:message code="default.new.label" args="[entityName]" /></a></li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> Projetos</a></li>
                 <li><a href="#">Lista</a></li>
             </ol>
         </section>
@@ -36,7 +36,39 @@
 
                 </div>
                 <div class="box-body">
-                    <f:table collection="${projectList}" />
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>Nome</td>
+                            <td>Descricao</td>
+                            <td>Status</td>
+                            <td>Data de Inicio</td>
+                            <td>Data de Encerramento</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <g:each in="${projectList}" status="i" var="project">
+                            <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+                                <td><g:link action="dashboard" id="${project.id}">${project.id}</g:link></td>
+                                <td>${project.name}</td>
+                                <td>${project.description}</td>
+                                <td>${project.status}</td>
+
+                                <td><g:formatDate format="dd/MM/yyyy - HH:mm" date="${project.startDate}" /></td>
+                                <td><g:formatDate format="dd/MM/yyyy - HH:mm" date="${project.endDate}" /></td>
+
+
+                            </tr>
+                        </g:each>
+                        <g:if test="${projectList == null}">
+                            <tr>
+                                <td class="text-center">Não há tarefas cadastradas.</td>
+                            </tr>
+                        </g:if>
+                        </tbody>
+                    </table>
+
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">

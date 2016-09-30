@@ -56,10 +56,12 @@
 
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
-                    <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+                    <span class="info-box-icon bg-green"><i class="ion ion-arrow-down-a"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Sales</span>
-                        <span class="info-box-number">760</span>
+                        <span class="info-box-text">Arquivo Final</span>
+                        <g:if test="${project.status = beowulf.ProjectStatus.FINISHED}">
+                           <g:link controller="project" id="${project.id}" action="downloadFinalFile"><span class="info-box-number">Baixar</span></g:link>
+                        </g:if>
                     </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
             </div><!-- /.col -->
