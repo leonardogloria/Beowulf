@@ -147,6 +147,7 @@
                             </li>
                             <!-- Menu Body -->
                             <li class="user-body">
+                                <!--
                                 <div class="row">
                                     <div class="col-xs-4 text-center">
                                         <a href="#">Followers</a>
@@ -159,6 +160,7 @@
                                     </div>
                                 </div>
                                 <!-- /.row -->
+
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">

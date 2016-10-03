@@ -17,7 +17,7 @@ class User implements Serializable {
 	String lastName
 
 	Type type
-	static hasMany = [institutions: Institution, validations:ValidationLogin]
+	static hasMany = [institutions: Institution, validations:ValidationLogin,timeLine:TimeLine]
 
 
 	boolean enabled = true
@@ -25,6 +25,7 @@ class User implements Serializable {
 	boolean accountLocked
 	boolean passwordExpired
 	Date userSince = new Date()
+	PersonalInfo personalInfo = new PersonalInfo()
 
 
 	Set<Role> getAuthorities() {

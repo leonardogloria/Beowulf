@@ -40,12 +40,15 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title"></h3>
+                <g:if test="${project.status != beowulf.ProjectStatus.FINISHED}">
+
                     <div class="row">
                         <div class="col-md-12 bottom-mg-15">
                             <g:link action="create" id="${project.id}" class="btn btn-app" ><i class="fa fa-save"></i>Novo</g:link>
                         </div>
 
                     </div>
+                </g:if>
                     <div class="row">
                         <g:form action="index" id="${project.id}" class="form-horizontal">
                             <div class="col-xs-3">
@@ -103,11 +106,7 @@
 
                             </tr>
                         </g:each>
-                        <g:if test="${versions?.size() == 0}">
-                            <tr>
-                                <td class="text-center">Não há versões cadastradas.</td>
-                            </tr>
-                        </g:if>
+
                         </tbody>
                     </table>
 

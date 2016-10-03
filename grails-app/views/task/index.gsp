@@ -41,6 +41,7 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title"></h3>
+                    <g:if test="${project.status != beowulf.ProjectStatus.FINISHED}">
 
                     <div class="row">
                         <div class="col-md-12 bottom-mg-15">
@@ -48,6 +49,7 @@
                         </div>
 
                     </div>
+                    </g:if>
                     <br />
                     <div class="row">
                         <g:form action="index" id="${project.id}" class="form-horizontal">

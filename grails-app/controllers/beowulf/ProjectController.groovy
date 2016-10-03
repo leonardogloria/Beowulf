@@ -50,8 +50,8 @@ class ProjectController {
 
         project.status = ProjectStatus.FINISHED
         def webrootDir = servletContext.getRealPath("/") //app directory
-        new File("C:\\consumidor\\tcc\\" + project.id ).mkdir()
-        file.transferTo(new File("C:\\consumidor\\tcc\\" + project.id + "\\" + project.finishInfo.fileName))
+        new File("/consumidor/tcc/" + project.id ).mkdir()
+        file.transferTo(new File("/consumidor/tcc/" + project.id + "/" + project.finishInfo.fileName))
 
         if(project.save(flush:true)) {
             flash.message = "Projeto Finalizado com sucesso!"
@@ -114,7 +114,8 @@ class ProjectController {
     }
     def downloadFinalFile(Project project){
 
-        def file = new File("C:\\consumidor\\tcc\\" + project.id +"\\" + project.finishInfo.fileName)
+        def file = new File("/consumidor/tcc/" + project.id + "/" + project.finishInfo.fileName)
+
 
         if (file.exists()) {
             response.setContentType("application/octet-stream")

@@ -2,13 +2,12 @@ package beowulf
 
 import grails.plugin.springsecurity.annotation.Secured
 
-@Secured("ROLE_USER")
+@Secured("permitAll")
 class DashboardController {
     def springSecurityService
-    def index() {
+    def board(){
         def loggedUser = springSecurityService.getPrincipal()
         def user = User.findByUsername(loggedUser.username)
-
-        def _myTasks = Task.findAllByAssignedTo(user)
+        respond model:[user:user]
     }
 }

@@ -1,6 +1,7 @@
 import beowulf.Institution
 import beowulf.Project
 import beowulf.Role
+import beowulf.TimeLine
 import beowulf.Type
 import beowulf.User
 import beowulf.UserRole
@@ -16,8 +17,13 @@ class BootStrap {
          inst.save()
          new Institution(name: "Cederj").save()
 
+        TimeLine tm = new TimeLine(eventName: 'Projeto Teste1 Criado',date: new Date())
+
         def testUser = new User(username: 'lsilva@credilink.com.br', password: '123456',firstName: "Leonardo",
-        lastName: "Gloria",type: Type.ORIENTADOR,accountLocked: false).addToInstitutions(inst).save(failOnError:true)
+        lastName: "Gloria",type: Type.ORIENTADOR,accountLocked: false)
+
+            .addToInstitutions(inst).save(failOnError:true)
+            .addToTimeLine(tm)
 
         def testUser2 = new User(username: 'leonardo.gloria@globo.com', password: '123456',firstName: "Cabeca",
                 lastName: "de Balde",type: Type.ORIENTANDO,accountLocked: false).save(failOnError:true)
@@ -47,6 +53,8 @@ class BootStrap {
         }
         def projeto = new Project(owner: testUser,name: "Teste1",description: "Teste",endDate: new Date(),startDate: new Date(),institution: inst)
         projeto.save()
+
+
 
 
 

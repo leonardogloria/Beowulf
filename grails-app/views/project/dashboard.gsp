@@ -59,9 +59,12 @@
                     <span class="info-box-icon bg-green"><i class="ion ion-arrow-down-a"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Arquivo Final</span>
-                        <g:if test="${project.status = beowulf.ProjectStatus.FINISHED}">
+                        <g:if test="${project.status == beowulf.ProjectStatus.FINISHED}">
                            <g:link controller="project" id="${project.id}" action="downloadFinalFile"><span class="info-box-number">Baixar</span></g:link>
                         </g:if>
+                        <g:else>
+                            Disponível quando o projeto estiver finalizado
+                        </g:else>
                     </div><!-- /.info-box-content -->
                 </div><!-- /.info-box -->
             </div><!-- /.col -->
@@ -128,8 +131,10 @@
                     </ul><!-- /.users-list -->
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix">
-                <g:link action="addMember" id="${project.id}" class="btn btn-sm btn-info btn-flat pull-left">Convidar Participante</g:link>
 
+                <g:if test="${project.status != beowulf.ProjectStatus.FINISHED}">
+                    <g:link action="addMember" id="${project.id}" class="btn btn-sm btn-info btn-flat pull-left">Convidar Participante</g:link>
+                </g:if>
             </div><!-- /.box-footer -->
             </div><!--/.box -->
 
@@ -141,8 +146,10 @@
                 <h3 class="box-title">Últimas Tarefas</h3>
 
                 <div class="box-tools pull-right">
-                    <g:link controller="task" action="create" id="${project.id}"><span class="label label-primary">Nova Tarefa</span></g:link>
+            <g:if test="${project.status != beowulf.ProjectStatus.FINISHED}">
 
+                <g:link controller="task" action="create" id="${project.id}"><span class="label label-primary">Nova Tarefa</span></g:link>
+            </g:if>
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
             </div><!-- /.box-header -->
@@ -155,7 +162,8 @@
                                 <asset:image src="task.png"></asset:image>
                             </div>
                             <div class="product-info">
-                                <g:link controller="task" action="edit" id="${task.id}" class="product-title">${task.name} <span class="label label-warning pull-right">${task.status}</span></g:link>
+
+                            <g:link controller="task" action="edit" id="${task.id}" class="product-title">${task.name} <span class="label label-warning pull-right">${task.status}</span></g:link>
                                 <span class="product-description">
                                     ${task.description}
                                 </span>
@@ -178,9 +186,12 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Últimas Versões</h3>
                 <div class="box-tools pull-right">
+                    <g:if test="${project.status != beowulf.ProjectStatus.FINISHED}">
+
                     <g:link controller="version" action="create" id="${project.id}">
                         <span class="label label-primary">Nova Versão</span>
                     </g:link>
+                    </g:if>
 
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                 </div>
